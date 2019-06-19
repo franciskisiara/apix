@@ -1,14 +1,14 @@
-# API-X
+# Project Title
 
-Automatically load your VUEX store from your REST api routes
+One Paragraph of project description goes here
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisities
+### Prerequisites
 
-This project works well with Vue as a framework and Vuex as the state management tool 
+What things you need to install the software and how to install them
 
 ```
 Give examples
@@ -16,17 +16,17 @@ Give examples
 
 ### Installing
 
-In order to use apix, you will need to download and configure it 
+A step by step series of examples that tell you how to get a development env running
 
-Install apix locally in your project by running
+Say what the step will be
 
-```javascript
-npm i @agog/apix
+```
+Give the example
 ```
 
-To configure api ...
+And repeat
 
-```javascript
+```
 until finished
 ```
 
