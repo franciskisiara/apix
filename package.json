@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel src -d dist",
     "prepublishOnly": "npm run build",
-    "dev": "babel-node -- ./index.js",
+    "dev": "nodemon --exec babel-node index.js",
     "test": "mocha src/tests/*.spec.js"
   },
   "keywords": [
@@ -25,6 +25,7 @@
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
-    "@babel/preset-env": "^7.4.5"
+    "@babel/preset-env": "^7.4.5",
+    "nodemon": "^1.19.1"
   }
 }
