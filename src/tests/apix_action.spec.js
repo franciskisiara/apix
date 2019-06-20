@@ -5,7 +5,7 @@ import ApixAction from '../lib/ApixAction';
 
 describe('ApixAction', () => {
 
-    let baseUrl = 'http://apix.app.com/api/v1/resource';
+    let baseUrl = 'http://apix.app.com/api/v1/';
 
     it('can be initialised using the default constructor', () => {
 
@@ -17,7 +17,7 @@ describe('ApixAction', () => {
 
     });
 
-    it('can be iniialised with a search concern and append term to base url', () => {
+    it('can be initialised with a search concern and append term to base url', () => {
 
         let apixAction = new ApixAction(baseUrl, {
             search: 'term'
@@ -28,7 +28,7 @@ describe('ApixAction', () => {
     });
 
 
-    it('can be iniialised with a pagination concern and append page to the base url', () => {
+    it('can be initialised with a pagination concern and append page to the base url', () => {
 
         let apixAction = new ApixAction(baseUrl, {
             page: 1

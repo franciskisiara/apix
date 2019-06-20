@@ -30,7 +30,7 @@ export default class ApixAction
             let first_key = Object.keys(params)[0];
             let first_value = Object.values(params)[0];
         
-            this.base_url = this.makeUrl() + `${first_key}=${first_value}`;
+            this.base_url = `${this.makeUrl()}${first_key}=${first_value}`;
     
             for (let param in params) 
             {
@@ -57,4 +57,13 @@ export default class ApixAction
     {
         return this.base_url.indexOf('?') > -1 ? `${this.base_url}&` : `${this.base_url}?`;
     }
+
+    /*
+     * Moulds the route given an options object
+     */
+    getUrl()
+    {
+        return this.base_url;
+    }
+
 }
