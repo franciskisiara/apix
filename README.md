@@ -1,67 +1,24 @@
 # API-X
 
-Automatically load your VUEX store from your REST api routes
+Automatically load your VUEX store from your GET REST api routes
 
 ## Getting Started
 
-In order to get started with apix, you will need a web application running on [Vue js](https://vuejs.org/) utilising [Vuex](https://vuex.vuejs.org/) for state management
-and a backend service providing resources via rest endpoints.
+Apix runs best on a web application powered by [Vue js](https://vuejs.org/) and [Vuex](https://vuex.vuejs.org/)
 
-Apix uses [axios](https://github.com/axios/axios) to send calls to the defined endpoints and so the client has been added as a dependency
+Internally, apix uses [axios](https://github.com/axios/axios) to send HTTP requests.
 
 ### Installing
 
-Install apix locally in your project by running
+Using npm
 
 ```
-npm i @agog/apix
+$ npm i @agog/apix
 ```
 
 ### Usage
 
-You can then import the apix store generator in your files by using
-
-```
-import Apix from '@agog/apix';
-```
-
-Initialise the apix object by calling the constructor and passing an object as an arguments with the necessary configurations
-
-```javascript
-let apix = new Apix({
-    base_url: 'http://earths-heroes/api/v1',
-    resources: [
-        { name: 'marvelHeroes', endpoint: 'marvel-heroes' }
-    ],
-})
-```
-
-### Configurations
-The apix object accepts an object as a parameter with the following properties:-
-
-<code>**base_url**</code>
-Your application's url including versioning and paths specifying its an api
-
-e.g. <code>http://earths-heroes/api/v1</code>
-
-<code>**resources**</code>
-An array that contains the resources objects with the name and endpoints defined
-
-```json
-{ 
-    "name": "marvelHeroes", 
-    "endpoint": "marvel-heroes" 
-}
-```
-
-The endpoint of a particular resource will be appended to the base_url
-
-### Integrating with Vuex
-
-The generated methods and properties can then be spread into an applications Vuex store by using the spread operator and calling the respective api 
-on the apix object.
-
-The entire store.js file will then be 
+You can then import and use the apix store generator in your files using the example below
 
 ```javascript
 import Vue from 'vue';
@@ -95,8 +52,10 @@ export const store = new Vuex.Store({
         ...apix.getActions(),
     },
 });
-
 ```
+
+### Configurations
+The apix object accepts an object as a parameter that must contain the base_url and the resources array of objects
 
 ## Running the tests
 
