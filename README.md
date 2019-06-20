@@ -55,7 +55,7 @@ export const store = new Vuex.Store({
 ```
 
 ### Configurations
-The apix object accepts an object as a parameter that must contain the base_url and the resources array of objects
+The apix object accepts an object as a parameter that must contain the ***base_url*** and the ***resources*** array of objects
 
 ## Running the tests
 
