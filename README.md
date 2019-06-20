@@ -4,87 +4,116 @@ Automatically load your VUEX store from your REST api routes
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+In order to get started with apix, you will need a web application running on [Vue js](https://vuejs.org/) utilising [Vuex](https://vuex.vuejs.org/) for state management
+and a backend service providing resources via rest endpoints.
 
-### Prerequisities
-
-This project works well with Vue as a framework and Vuex as the state management tool 
-
-```
-Give examples
-```
+Apix uses [axios](https://github.com/axios/axios) to send calls to the defined endpoints and so the client has been added as a dependency
 
 ### Installing
 
-In order to use apix, you will need to download and configure it 
-
 Install apix locally in your project by running
 
-```javascript
+```
 npm i @agog/apix
 ```
 
-To configure api ...
+### Usage
 
-```javascript
-until finished
+You can then import the apix store generator in your files by using
+
+```
+import Apix from '@agog/apix';
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Initialise the apix object by calling the constructor and passing an object as an arguments with the necessary configurations
+
+```javascript
+let apix = new Apix({
+    base_url: 'http://earths-heroes/api/v1',
+    resources: [
+        { name: 'marvelHeroes', endpoint: 'marvel-heroes' }
+    ],
+})
+```
+
+### Configurations
+The apix object accepts an object as a parameter with the following properties:-
+
+<code>**base_url**</code>
+Your application's url including versioning and paths specifying its an api
+
+e.g. <code>http://earths-heroes/api/v1</code>
+
+<code>**resources**</code>
+An array that contains the resources objects with the name and endpoints defined
+
+```json
+{ 
+    "name": "marvelHeroes", 
+    "endpoint": "marvel-heroes" 
+}
+```
+
+The endpoint of a particular resource will be appended to the base_url
+
+### Integrating with Vuex
+
+The generated methods and properties can then be spread into an applications Vuex store by using the spread operator and calling the respective api 
+on the apix object.
+
+The entire store.js file will then be 
+
+```javascript
+import Vue from 'vue';
+import Vuex from 'vuex';
+import Apix from '@agog/apix';
+
+Vue.use(Vuex);
+
+let apix = new Apix({
+    base_url: 'http://earths-heroes/api/v1',
+    resources: [
+        { name: 'marvelHeroes', endpoint: 'marvel-heroes' }
+    ],
+});
+
+export const store = new Vuex.Store({
+
+    state: {
+        ...apix.getState(),
+    },
+
+    getters: {
+        ...apix.getGetters(),
+    },
+
+    mutations: {
+        ...apix.getMutations(),
+    },
+
+    actions: {
+        ...apix.getActions(),
+    },
+});
+
+```
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+In order to run the tests run the following command in the root of the application
 
 ```
-Give an example
+npm test
 ```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+* [NodeJs](https://nodejs.org/en/) - The framework used
+* [npm](https://www.npmjs.com/) - Dependency management
 
 ## Authors
 
-* **Kisiara Francis** 
+**Kisiara Francis** 
     - [Github](https://github.com/franciskisiara)
     - [Website](https://profiles.agog.co.ke/kisiara)
     - [LinkedIn](https://www.linkedin.com/in/francis-kisiara-289360ab/)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc

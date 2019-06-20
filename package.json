@@ -1,6 +1,6 @@
 {
-  "name": "apix",
-  "version": "1.0.0",
+  "name": "@agog/apix",
+  "version": "0.0.1",
   "description": "Automatically load your store in Vuex using REST api resources",
   "main": "dist/index.js",
   "scripts": {
@@ -19,9 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.0",
-    "chai": "^4.2.0",
-    "mocha": "^6.1.4"
+    "axios": "^0.19.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -29,8 +27,8 @@
     "@babel/node": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "@babel/register": "^7.4.4",
-    "chai-url": "^1.0.4",
     "nodemon": "^1.19.1",
-    "sinon": "^7.3.2"
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
   }
 }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { validate, helpers } from '../library';
 import ApixAction from './ApixAction';
 
-export default class ApixGenerator
+let Apix = class ApixGenerator
 {
     constructor(config)
     {
@@ -81,9 +81,9 @@ export default class ApixGenerator
      */
     setActions()
     {
-        this.resources.forEach( ({name, url}) => {
+        this.resources.forEach( ({name, endpoint}) => {
 
-            let endpoint = `${this.base_url}/${url.replace(/^\/+/g, '')}`;
+            let endpoint = `${this.base_url}/${endpoint.replace(/^\/+/g, '')}`;
 
             let functionName = 'set' + helpers.upper(name);
 
@@ -135,3 +135,9 @@ export default class ApixGenerator
         return this.mutations;
     }
 }
+
+
+module.exports = Apix;
+
+// Allow use of default import syntax in TypeScript
+module.exports.default = Apix;
