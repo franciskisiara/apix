@@ -1,6 +1,6 @@
 {
   "name": "@agog/apix",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Automatically load your store in Vuex using REST api resources",
   "main": "dist/index.js",
   "scripts": {
