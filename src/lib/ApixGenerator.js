@@ -98,7 +98,7 @@ let Apix = class ApixGenerator
                     context.commit(functionName, data);
 
                 });
-            };
+            }.bind(this);
 
         });
     }
