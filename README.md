@@ -30,7 +30,7 @@ Vue.use(Vuex);
 let apix = new Apix({
     base_url: 'http://earths-heroes/api/v1',
     resources: [
-        { name: 'marvelHeroes', endpoint: 'marvel-heroes' }
+        { name: 'marvelHeroes', url: 'marvel-heroes' }
     ],
 });
 

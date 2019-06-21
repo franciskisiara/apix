@@ -81,9 +81,9 @@ let Apix = class ApixGenerator
      */
     setActions()
     {
-        this.resources.forEach( ({name, endpoint}) => {
+        this.resources.forEach( ({name, url}) => {
 
-            let endpoint = `${this.base_url}/${endpoint.replace(/^\/+/g, '')}`;
+            let endpoint = `${this.base_url}/${url.replace(/^\/+/g, '')}`;
 
             let functionName = 'set' + helpers.upper(name);
 
