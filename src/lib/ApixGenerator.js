@@ -9,7 +9,9 @@ let Apix = class ApixGenerator
     {
         validate(config);
 
-        this.base_url = config.base_url;
+        this.visa = config.visa || {};
+
+        this.prefix = config.prefix || '';
 
         this.resources = config.resources;
 
@@ -83,7 +85,7 @@ let Apix = class ApixGenerator
     {
         this.resources.forEach( ({name, url}) => {
 
-            let endpoint = `${this.base_url}/${url.replace(/^\/+/g, '')}`;
+            let endpoint = `${this.prefix}/${url.replace(/^\/+/g, '')}`;
 
             let functionName = 'set' + helpers.upper(name);
 
@@ -91,7 +93,7 @@ let Apix = class ApixGenerator
 
                 let actionUrl = new ApixAction(endpoint, options).getUrl();
 
-                axios.get(actionUrl).then(({data}) => {
+                axios.get(actionUrl, this.visa).then(({data}) => {
 
                     context.commit(functionName, data);
 

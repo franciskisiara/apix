@@ -1,8 +1,8 @@
 export default class ApixAction
 {
-    constructor (baseUrl, options)
+    constructor (prefix, options)
     {
-        this.base_url = baseUrl;
+        this.prefix = prefix;
 
         this.search(options);
 
@@ -17,7 +17,7 @@ export default class ApixAction
      */
     search ({search})
     {
-        this.base_url = search ? `${this.base_url}?search=${search}` : this.base_url;
+        this.prefix = search ? `${this.prefix}?search=${search}` : this.prefix;
     }
 
     /*
@@ -30,13 +30,13 @@ export default class ApixAction
             let first_key = Object.keys(params)[0];
             let first_value = Object.values(params)[0];
         
-            this.base_url = `${this.makeUrl()}${first_key}=${first_value}`;
+            this.prefix = `${this.makeUrl()}${first_key}=${first_value}`;
     
             for (let param in params) 
             {
                 if(param !== first_key)
                 {
-                    this.base_url = `${this.base_url}&${param}=${params[param]}`;
+                    this.prefix = `${this.prefix}&${param}=${params[param]}`;
                 }
             }
         }
@@ -47,7 +47,7 @@ export default class ApixAction
      */
     paginated ({page})
     {
-        this.base_url = page ? `${this.base_url}?page=${page}` : this.base_url;
+        this.prefix = page ? `${this.prefix}?page=${page}` : this.prefix;
     }
 
     /*
@@ -55,7 +55,7 @@ export default class ApixAction
      */
     makeUrl()
     {
-        return this.base_url.indexOf('?') > -1 ? `${this.base_url}&` : `${this.base_url}?`;
+        return this.prefix.indexOf('?') > -1 ? `${this.prefix}&` : `${this.prefix}?`;
     }
 
     /*
@@ -63,7 +63,7 @@ export default class ApixAction
      */
     getUrl()
     {
-        return this.base_url;
+        return this.prefix;
     }
 
 }

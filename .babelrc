@@ -3,7 +3,7 @@
     "@babel/preset-env"   
   ],
 
-  "ignore": [
-    "./src/tests",
-  ]
+//   "ignore": [
+//     "./src/tests",
+//   ]
 }
