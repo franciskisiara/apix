@@ -9,11 +9,11 @@ let Apix = class ApixGenerator
     {
         validate(config);
 
-        this.visa = config.visa || {};
-
         this.prefix = config.prefix || '';
 
         this.resources = config.resources;
+
+        this.headers = config.headers || {};
 
         this.state = {};
 
@@ -93,7 +93,7 @@ let Apix = class ApixGenerator
 
                 let actionUrl = new ApixAction(endpoint, options).getUrl();
 
-                axios.get(actionUrl, this.visa).then(({data}) => {
+                axios.get(actionUrl, this.headers).then(({data}) => {
 
                     context.commit(functionName, data);
 

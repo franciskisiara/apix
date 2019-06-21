@@ -28,7 +28,8 @@ import Apix from '@agog/apix';
 Vue.use(Vuex);
 
 let apix = new Apix({
-    base_url: 'http://earths-heroes/api/v1',
+    prefix: '/api/v1',
+    headers: {},
     resources: [
         { name: 'marvelHeroes', url: 'marvel-heroes' }
     ],
@@ -55,7 +56,8 @@ export const store = new Vuex.Store({
 ```
 
 ### Configurations
-The apix object accepts an object as a parameter that must contain the ***base_url*** and the ***resources*** array of objects
+The apix object constructor accepts an object as a parameter that must contain the ***resources*** array of objects, an optional ***prefix*** for 
+versioning and optional ***headers*** that will be passed to axios internally
 
 ## Running the tests
 
