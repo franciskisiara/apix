@@ -28,14 +28,29 @@ export default class ApixAction
         {
             let first_key = Object.keys(params)[0];
             let first_value = Object.values(params)[0];
+
+            if (!Array.isArray(first_value)) {
+                this.prefix = `${this.makeUrl()}${first_key}=${first_value}`;
+            } else {
+                for (let index = 0; index < first_value.length; index++) {
+                    const urller = index == 0 ? `${this.makeUrl()}` : `${this.prefix}&`
+                    this.prefix = `${urller}${first_key}=${first_value[index]}`;
+                }
+            }
         
-            this.prefix = `${this.makeUrl()}${first_key}=${first_value}`;
-    
             for (let param in params) 
             {
                 if(param !== first_key)
                 {
-                    this.prefix = `${this.prefix}&${param}=${params[param]}`;
+                    let value = params[param]
+
+                    if (!Array.isArray(value)) {
+                        this.prefix = `${this.prefix}&${param}=${value}`;
+                    } else {
+                        for (let index = 0; index < value.length; index++) {
+                            this.prefix = `${this.prefix}&${param}=${value[index]}`;
+                        }
+                    }
                 }
             }
         }
