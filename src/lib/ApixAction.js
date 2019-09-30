@@ -6,10 +6,9 @@ export default class ApixAction
 
         this.search(options);
 
-        this.params(options);
-
         this.paginated(options);
 
+        this.params(options);
     }
 
     /*
@@ -21,7 +20,7 @@ export default class ApixAction
     }
 
     /*
-     * Initiate a pagination concern - attach to the endpoint
+     * Initiate a params concern - attach to the endpoint
      */
     params ({params})
     {

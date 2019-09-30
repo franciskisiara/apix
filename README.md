@@ -1,6 +1,6 @@
 # API-X
 
-Automatically load your VUEX store from your GET REST api routes
+Automatically generate your VUEX store using your REST endpoints
 
 ## Getting Started
 

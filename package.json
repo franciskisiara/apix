@@ -1,7 +1,7 @@
 {
   "name": "@agog/apix",
   "version": "0.0.4",
-  "description": "Automatically load your store in Vuex using REST api resources",
+  "description": "Automatically generate your VUEX store using your REST endpoints",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src -d dist",

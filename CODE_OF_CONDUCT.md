@@ -1,4 +1,4 @@
-API-X's code of conduct is derived from the Ruby code of conduct. Any violations of the code of conduct may be reported to Kisiara Francis (franciskisiara@gmail.com).
+API-X's code of conduct is derived from the Ruby code of conduct. Any violations of the code of conduct may be reported to [Kisiara Francis](franciskisiara@gmail.com).
 
  - Participants will be tolerant of opposing views.
 
