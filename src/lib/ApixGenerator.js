@@ -138,7 +138,6 @@ let Apix = class ApixGenerator
     }
 }
 
-
 module.exports = Apix;
 
 // Allow use of default import syntax in TypeScript
