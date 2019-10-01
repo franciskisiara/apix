@@ -1,6 +1,6 @@
 {
   "name": "@agog/apix",
-  "version": "0.0.5-beta.1",
+  "version": "0.0.5-beta.2",
   "description": "Automatically generate your VUEX store using your REST endpoints",
   "main": "dist/index.js",
   "scripts": {
