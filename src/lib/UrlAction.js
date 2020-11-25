@@ -1,76 +1,105 @@
 export default class Apix {
-  constructor (prefix, options) {
-    this.prefix = prefix
-    this.search(options)
-    this.paginated(options)
-    this.params(options)
+  /*
+   * Accepts an option to determine the best course of action
+   */
+  constructor (baseUrl, options) {
+    this.url = baseUrl
+    this.setUrl(options)
   }
 
   /*
-   * Initiate a search concern - allowing search parameters to be attached to the endpoint
+   * Moulds the route given an options object
    */
-  search ({search}) {
-    this.prefix = search ? `${this.prefix}?search=${search}` : this.prefix
+  setUrl (options) {
+    if (options.hasOwnProperty('items')) {
+      this.redis(options.items)
+    }
+
+    if (options.hasOwnProperty('page')) {
+      this.paginated(options.page)
+    }
+
+    if (options.hasOwnProperty('search')) {
+      this.search(options.search)
+    }
+
+    if (options.hasOwnProperty('params')) {
+      this.params(options.params)
+    }
+
+    if (options.hasOwnProperty('routes')) {
+      this.routes(options.routes)
+    }
   }
 
   /*
-   * Initiate a params concern - attach to the endpoint
+   * Retrieves the route
    */
-  params ({params}) {
-        if (params) 
-        {
-            let first_key = Object.keys(params)[0]
-            let first_value = Object.values(params)[0]
+  getUrl () {
+    return this.url
+  }
 
-            if (!Array.isArray(first_value)) {
-                this.prefix = `${this.makeUrl()}${first_key}=${first_value}`
-            } else {
-                for (let index = 0 index < first_value.length index++) {
-                    const urller = index == 0 ? `${this.makeUrl()}` : `${this.prefix}&`
-                    this.prefix = `${urller}${first_key}=${first_value[index]}`
-                }
-            }
-        
-            for (let param in params) 
-            {
-                if(param !== first_key)
-                {
-                    let value = params[param]
+  /**
+   * This looks at a url and determines if there is cause to search
+   * @deprecated
+   */
+  search (term) {
+    if (term) {
+      this.url = this.url.includes('?') 
+        ? `${this.url}&search=${term}`
+        : `${this.url}?search=${term}`
+    }
+  }
 
-                    if (!Array.isArray(value)) {
-                        this.prefix = `${this.prefix}&${param}=${value}`
-                    } else {
-                        for (let index = 0 index < value.length index++) {
-                            this.prefix = `${this.prefix}&${param}=${value[index]}`
-                        }
-                    }
-                }
-            }
+  /**
+   * This looks at a url and determines if there is cause to paginate given the user request
+   * @deprecated
+   */
+  paginated (page) {
+    if (page) {
+      this.url = this.url.includes('?') 
+        ? `${this.url}&page=${page}`
+        : `${this.url}?page=${page}`
+    }
+  }
+
+  /*
+   * This looks at a url and determines if there is cause to add parameters
+   */
+  params (params) {
+    let first_key = _.keys(params)[0];
+    let first_value = _.values(params)[0];
+    this.url = this.makeUrl(first_key, first_value)
+    _.each(params, (parameter, key) => {
+      if (key !== first_key) {
+        if (Array.isArray(parameter)) {
+          parameter.forEach(param => {
+            this.url = `${this.url}&${key}[]=${param}`
+          })
+        } else {
+          this.url = `${this.url}&${key}=${parameter}`
         }
-    }
+      }
+    })
+  }
 
-    /*
-     * Initiate a pagination concern - attach to the endpoint
-     */
-    paginated ({page})
-    {
-        this.prefix = page ? `${this.prefix}?page=${page}` : this.prefix
+  routes (routes) {
+    for (let route in routes) {
+      if (this.url.includes(`:${route}`)) {
+        this.url = this.url.replace(`:${route}`, routes[route])
+      }
     }
+  }
 
-    /*
-     * Adds the ? to the query string if the parameter is the first value passed
-     */
-    makeUrl()
-    {
-        return this.prefix.indexOf('?') > -1 ? `${this.prefix}&` : `${this.prefix}?`
+  makeUrl (key, value) {
+    let base = this.url.indexOf('?') > -1 ? `${this.url}&` : `${this.url}?`
+    if (Array.isArray(value)) {
+      value.forEach(item => {
+        base = `${base}&${key}[]=${item}`;
+      })
+    } else {
+      base = base + `${key}=${value}`;
     }
-
-    /*
-     * Moulds the route given an options object
-     */
-    getUrl()
-    {
-        return this.prefix
-    }
-
+    return base;
+  }
 }
